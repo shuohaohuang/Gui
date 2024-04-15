@@ -9,7 +9,7 @@ namespace Gui
 {
     public class Xml
     {
-        const string Path = "Comarques.csv";
+        const string Path = "Comarques.xml";
 
 
         public static void Create(Dictionary<int, string> counties)

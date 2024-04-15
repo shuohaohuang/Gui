@@ -41,20 +41,21 @@
             bttClear = new Button();
             bttSave = new Button();
             gb1 = new GroupBox();
+            txtCDC = new TextBox();
+            txtTotal = new TextBox();
+            txtDX = new TextBox();
             txtPopulation = new TextBox();
             groupBox1 = new GroupBox();
-            label7 = new Label();
-            label6 = new Label();
-            label5 = new Label();
+            lblGb2_14 = new Label();
+            lblGb2_13 = new Label();
+            lblGb2_12 = new Label();
             lblGb2_11 = new Label();
             lblGb2_4 = new Label();
             lblGb2_3 = new Label();
             lblGb2_1 = new Label();
             lblGb2_2 = new Label();
             dgvCounties = new DataGridView();
-            txtDX = new TextBox();
-            txtTotal = new TextBox();
-            txtCDC = new TextBox();
+            lblTest = new Label();
             gb1.SuspendLayout();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvCounties).BeginInit();
@@ -74,7 +75,7 @@
             lblInfo2.AutoSize = true;
             lblInfo2.Location = new Point(113, 41);
             lblInfo2.Name = "lblInfo2";
-            lblInfo2.Size = new Size(53, 15);
+            lblInfo2.Size = new Size(55, 15);
             lblInfo2.TabIndex = 3;
             lblInfo2.Text = "Comarca";
             // 
@@ -109,7 +110,7 @@
             label1.AutoSize = true;
             label1.Location = new Point(9, 124);
             label1.Name = "label1";
-            label1.Size = new Size(87, 15);
+            label1.Size = new Size(88, 15);
             label1.TabIndex = 8;
             label1.Text = "Domèstic xarxa";
             // 
@@ -189,19 +190,39 @@
             gb1.TabStop = false;
             gb1.Text = "Gestió de dades demografiques de regions";
             // 
+            // txtCDC
+            // 
+            txtCDC.Location = new Point(431, 177);
+            txtCDC.Name = "txtCDC";
+            txtCDC.Size = new Size(86, 23);
+            txtCDC.TabIndex = 19;
+            // 
+            // txtTotal
+            // 
+            txtTotal.Location = new Point(431, 140);
+            txtTotal.Name = "txtTotal";
+            txtTotal.Size = new Size(86, 23);
+            txtTotal.TabIndex = 18;
+            // 
+            // txtDX
+            // 
+            txtDX.Location = new Point(9, 183);
+            txtDX.Name = "txtDX";
+            txtDX.Size = new Size(125, 23);
+            txtDX.TabIndex = 17;
+            // 
             // txtPopulation
             // 
             txtPopulation.Location = new Point(278, 73);
             txtPopulation.Name = "txtPopulation";
             txtPopulation.Size = new Size(125, 23);
             txtPopulation.TabIndex = 16;
-            txtPopulation.TextChanged += txtPopulation_TextChanged;
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(label7);
-            groupBox1.Controls.Add(label6);
-            groupBox1.Controls.Add(label5);
+            groupBox1.Controls.Add(lblGb2_14);
+            groupBox1.Controls.Add(lblGb2_13);
+            groupBox1.Controls.Add(lblGb2_12);
             groupBox1.Controls.Add(lblGb2_11);
             groupBox1.Controls.Add(lblGb2_4);
             groupBox1.Controls.Add(lblGb2_3);
@@ -214,35 +235,35 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Estadístiques";
             // 
-            // label7
+            // lblGb2_14
             // 
-            label7.AutoSize = true;
-            label7.ForeColor = Color.Blue;
-            label7.Location = new Point(235, 153);
-            label7.Name = "label7";
-            label7.Size = new Size(29, 15);
-            label7.TabIndex = 25;
-            label7.Text = "N/A";
+            lblGb2_14.AutoSize = true;
+            lblGb2_14.ForeColor = Color.Blue;
+            lblGb2_14.Location = new Point(235, 153);
+            lblGb2_14.Name = "lblGb2_14";
+            lblGb2_14.Size = new Size(29, 15);
+            lblGb2_14.TabIndex = 25;
+            lblGb2_14.Text = "N/A";
             // 
-            // label6
+            // lblGb2_13
             // 
-            label6.AutoSize = true;
-            label6.ForeColor = Color.Blue;
-            label6.Location = new Point(235, 116);
-            label6.Name = "label6";
-            label6.Size = new Size(29, 15);
-            label6.TabIndex = 24;
-            label6.Text = "N/A";
+            lblGb2_13.AutoSize = true;
+            lblGb2_13.ForeColor = Color.Blue;
+            lblGb2_13.Location = new Point(235, 116);
+            lblGb2_13.Name = "lblGb2_13";
+            lblGb2_13.Size = new Size(29, 15);
+            lblGb2_13.TabIndex = 24;
+            lblGb2_13.Text = "N/A";
             // 
-            // label5
+            // lblGb2_12
             // 
-            label5.AutoSize = true;
-            label5.ForeColor = Color.Blue;
-            label5.Location = new Point(235, 73);
-            label5.Name = "label5";
-            label5.Size = new Size(29, 15);
-            label5.TabIndex = 23;
-            label5.Text = "N/A";
+            lblGb2_12.AutoSize = true;
+            lblGb2_12.ForeColor = Color.Blue;
+            lblGb2_12.Location = new Point(235, 73);
+            lblGb2_12.Name = "lblGb2_12";
+            lblGb2_12.Size = new Size(29, 15);
+            lblGb2_12.TabIndex = 23;
+            lblGb2_12.Text = "N/A";
             // 
             // lblGb2_11
             // 
@@ -259,7 +280,7 @@
             lblGb2_4.AutoSize = true;
             lblGb2_4.Location = new Point(6, 153);
             lblGb2_4.Name = "lblGb2_4";
-            lblGb2_4.Size = new Size(208, 15);
+            lblGb2_4.Size = new Size(212, 15);
             lblGb2_4.TabIndex = 21;
             lblGb2_4.Text = "Consum domèstic per càpita més baix:";
             // 
@@ -268,7 +289,7 @@
             lblGb2_3.AutoSize = true;
             lblGb2_3.Location = new Point(6, 113);
             lblGb2_3.Name = "lblGb2_3";
-            lblGb2_3.Size = new Size(199, 15);
+            lblGb2_3.Size = new Size(203, 15);
             lblGb2_3.TabIndex = 20;
             lblGb2_3.Text = "Consum domèstic per càpita més alt:";
             // 
@@ -286,7 +307,7 @@
             lblGb2_2.AutoSize = true;
             lblGb2_2.Location = new Point(6, 73);
             lblGb2_2.Name = "lblGb2_2";
-            lblGb2_2.Size = new Size(133, 15);
+            lblGb2_2.Size = new Size(137, 15);
             lblGb2_2.TabIndex = 19;
             lblGb2_2.Text = "Consum domèstic mitjà:";
             // 
@@ -297,33 +318,22 @@
             dgvCounties.Name = "dgvCounties";
             dgvCounties.Size = new Size(840, 150);
             dgvCounties.TabIndex = 26;
+            dgvCounties.CellClick += dgvCounties_CellClick;
             // 
-            // txtDX
+            // lblTest
             // 
-            txtDX.Location = new Point(9, 183);
-            txtDX.Name = "txtDX";
-            txtDX.Size = new Size(125, 23);
-            txtDX.TabIndex = 17;
-            // 
-            // txtTotal
-            // 
-            txtTotal.Location = new Point(431, 140);
-            txtTotal.Name = "txtTotal";
-            txtTotal.Size = new Size(86, 23);
-            txtTotal.TabIndex = 18;
-            // 
-            // txtCDC
-            // 
-            txtCDC.Location = new Point(431, 177);
-            txtCDC.Name = "txtCDC";
-            txtCDC.Size = new Size(86, 23);
-            txtCDC.TabIndex = 19;
+            lblTest.Location = new Point(614, 273);
+            lblTest.Name = "lblTest";
+            lblTest.Size = new Size(238, 23);
+            lblTest.TabIndex = 27;
+            lblTest.Text = "label5";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(884, 515);
+            Controls.Add(lblTest);
             Controls.Add(dgvCounties);
             Controls.Add(groupBox1);
             Controls.Add(gb1);
@@ -363,14 +373,15 @@
         private Label lblGb2_3;
         private Label lblGb2_1;
         private Label lblGb2_2;
-        private Label label7;
-        private Label label6;
-        private Label label5;
+        private Label lblGb2_14;
+        private Label lblGb2_13;
+        private Label lblGb2_12;
         private Label lblGb2_11;
         private DataGridView dgvCounties;
         private TextBox txtPopulation;
         private TextBox txtCDC;
         private TextBox txtTotal;
         private TextBox txtDX;
+        private Label lblTest;
     }
 }
