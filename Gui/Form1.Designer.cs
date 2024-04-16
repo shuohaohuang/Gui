@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             lblInfo = new Label();
             lblInfo2 = new Label();
             lblInfo3 = new Label();
@@ -79,7 +79,7 @@
             lblInfo2.AutoSize = true;
             lblInfo2.Location = new Point(113, 41);
             lblInfo2.Name = "lblInfo2";
-            lblInfo2.Size = new Size(55, 15);
+            lblInfo2.Size = new Size(53, 15);
             lblInfo2.TabIndex = 3;
             lblInfo2.Text = "Comarca";
             // 
@@ -99,7 +99,7 @@
             cbbYear.Location = new Point(9, 73);
             cbbYear.Name = "cbbYear";
             cbbYear.Size = new Size(66, 23);
-            cbbYear.TabIndex = 5;
+            cbbYear.TabIndex = 0;
             // 
             // cbbCounty
             // 
@@ -107,14 +107,15 @@
             cbbCounty.Location = new Point(113, 73);
             cbbCounty.Name = "cbbCounty";
             cbbCounty.Size = new Size(125, 23);
-            cbbCounty.TabIndex = 6;
+            cbbCounty.TabIndex = 2;
+            cbbCounty.SelectedValueChanged += cbbCounty_SelectedValueChanged;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Location = new Point(9, 124);
             label1.Name = "label1";
-            label1.Size = new Size(88, 15);
+            label1.Size = new Size(87, 15);
             label1.TabIndex = 8;
             label1.Text = "Domèstic xarxa";
             // 
@@ -150,7 +151,7 @@
             txtAE.Location = new Point(149, 183);
             txtAE.Name = "txtAE";
             txtAE.Size = new Size(125, 23);
-            txtAE.TabIndex = 15;
+            txtAE.TabIndex = 5;
             // 
             // bttClear
             // 
@@ -158,7 +159,7 @@
             bttClear.Location = new Point(363, 315);
             bttClear.Name = "bttClear";
             bttClear.Size = new Size(75, 23);
-            bttClear.TabIndex = 16;
+            bttClear.TabIndex = 8;
             bttClear.Text = "Netejar";
             bttClear.UseVisualStyleBackColor = true;
             bttClear.Click += bttClear_Click;
@@ -168,7 +169,7 @@
             bttSave.Location = new Point(494, 315);
             bttSave.Name = "bttSave";
             bttSave.Size = new Size(75, 23);
-            bttSave.TabIndex = 17;
+            bttSave.TabIndex = 9;
             bttSave.Text = "Guardar";
             bttSave.UseVisualStyleBackColor = true;
             bttSave.Click += bttSave_Click;
@@ -201,28 +202,28 @@
             txtCDC.Location = new Point(431, 177);
             txtCDC.Name = "txtCDC";
             txtCDC.Size = new Size(86, 23);
-            txtCDC.TabIndex = 19;
+            txtCDC.TabIndex = 7;
             // 
             // txtTotal
             // 
             txtTotal.Location = new Point(431, 140);
             txtTotal.Name = "txtTotal";
             txtTotal.Size = new Size(86, 23);
-            txtTotal.TabIndex = 18;
+            txtTotal.TabIndex = 6;
             // 
             // txtDX
             // 
             txtDX.Location = new Point(9, 183);
             txtDX.Name = "txtDX";
             txtDX.Size = new Size(125, 23);
-            txtDX.TabIndex = 17;
+            txtDX.TabIndex = 4;
             // 
             // txtPopulation
             // 
             txtPopulation.Location = new Point(278, 73);
             txtPopulation.Name = "txtPopulation";
             txtPopulation.Size = new Size(125, 23);
-            txtPopulation.TabIndex = 16;
+            txtPopulation.TabIndex = 3;
             // 
             // groupBox1
             // 
@@ -286,7 +287,7 @@
             lblGb2_4.AutoSize = true;
             lblGb2_4.Location = new Point(6, 153);
             lblGb2_4.Name = "lblGb2_4";
-            lblGb2_4.Size = new Size(212, 15);
+            lblGb2_4.Size = new Size(208, 15);
             lblGb2_4.TabIndex = 21;
             lblGb2_4.Text = "Consum domèstic per càpita més baix:";
             // 
@@ -295,7 +296,7 @@
             lblGb2_3.AutoSize = true;
             lblGb2_3.Location = new Point(6, 113);
             lblGb2_3.Name = "lblGb2_3";
-            lblGb2_3.Size = new Size(203, 15);
+            lblGb2_3.Size = new Size(199, 15);
             lblGb2_3.TabIndex = 20;
             lblGb2_3.Text = "Consum domèstic per càpita més alt:";
             // 
@@ -313,7 +314,7 @@
             lblGb2_2.AutoSize = true;
             lblGb2_2.Location = new Point(6, 73);
             lblGb2_2.Name = "lblGb2_2";
-            lblGb2_2.Size = new Size(137, 15);
+            lblGb2_2.Size = new Size(133, 15);
             lblGb2_2.TabIndex = 19;
             lblGb2_2.Text = "Consum domèstic mitjà:";
             // 
@@ -322,16 +323,16 @@
             dgvCounties.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvCounties.Location = new Point(12, 349);
             dgvCounties.Name = "dgvCounties";
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = SystemColors.Control;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            dgvCounties.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleRight;
-            dgvCounties.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dgvCounties.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvCounties.RowsDefaultCellStyle = dataGridViewCellStyle2;
             dgvCounties.Size = new Size(860, 253);
             dgvCounties.TabIndex = 26;
             dgvCounties.CellClick += dgvCounties_CellClick;
@@ -368,7 +369,6 @@
         private Label lblInfo3;
         private ComboBox cbbYear;
         private ComboBox cbbCounty;
-        private ComboBox cbbPopulation;
         private Label label1;
         private TextBox textBox1;
         private Label label2;

@@ -53,19 +53,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\argo\\.nuget\\packages\\": {}
+    "C:\\Users\\mnm\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\argo\\Source\\Repos\\Gui\\Gui\\Gui.csproj",
+      "projectUniqueName": "C:\\Users\\mnm\\source\\repos\\Ac3_Gui\\Gui\\Gui.csproj",
       "projectName": "Gui",
-      "projectPath": "C:\\Users\\argo\\Source\\Repos\\Gui\\Gui\\Gui.csproj",
-      "packagesPath": "C:\\Users\\argo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\argo\\Source\\Repos\\Gui\\Gui\\obj\\",
+      "projectPath": "C:\\Users\\mnm\\source\\repos\\Ac3_Gui\\Gui\\Gui.csproj",
+      "packagesPath": "C:\\Users\\mnm\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\mnm\\source\\repos\\Ac3_Gui\\Gui\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\argo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\mnm\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -85,6 +90,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -115,7 +125,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
