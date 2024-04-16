@@ -2,24 +2,38 @@
 {
     public partial class Form1 : Form
     {
-        IReadOnlyList<string> HeadersName =
-                ["year", "code", "name", "population", "domNet", "ecoActs", "total", "conDomCap"],
-            HeadersTitle =
-
-                [
-                    "Any",
-                    "Codi comarca",
-                    "Comarca",
-                    "Població",
-                    "Domèstic xarxa",
-                    "Activitats econòmiques i fonts pròpies",
-                    "Total",
-                    "Consum domèstic per càpita"
-                ];
-        const string Yes = "Sí",
+        public const string Year = "year",
+            Code = "code",
+            Name = "name",
+            Population = "population",
+            DomNet = "domNet",
+            EcoActs = "ecoActs",
+            Total = "total",
+            ConDomCap = "conDomCap",
+            YearCA = "Any",
+            CountyCodeCA = "Codi comarca",
+            CountyCA = "Comarca",
+            PopulationCA = "Població",
+            DomesticNetworkCA = "Domèstic xarxa",
+            EconomicActivitiesCA = "Activitats econòmiques i fonts pròpies",
+            TotalCA = "Total",
+            DomesticConsumptionPerCapitaCA = "Consum domèstic per càpita",
+            Yes = "Sí",
             No = "No",
             ConstraindNumers = "Només nombres",
-            ConstrintWhole = "Només Enters";
+            ConstraindEmpty = "SeleccionaValor",
+            ConstrintWhole = "Només Enters",
+            Spliter = ",";
+        const int AvoidNegative = 0,
+            Two = 2,
+            One = 1,
+            DomConCapCollunm = 7,
+            YearColunm = 0,
+            CountyColunm = 2,
+            PopulationColunm = 3,
+            DomConColunm = 4,
+            MinPopulation = 200000,
+            MaxYear = 2050;
 
         public Form1()
         {
@@ -32,7 +46,7 @@
 
             Dictionary<int, string> CountiesDic = new Dictionary<int, string>();
 
-            for (int i = counties.Select(x => x.Year).Distinct().ToList().Min(); i <= 2050; i++)
+            for (int i = counties.Select(x => x.Year).Distinct().ToList().Min(); i <= MaxYear; i++)
                 cbbYear.Items.Add(i);
 
             foreach (var x in counties)
@@ -45,40 +59,49 @@
 
             counties = Csv.ReadCounties().OrderBy(x => x.Year).ToList();
 
-            for (int i = 0; i < HeadersTitle.Count; i++)
-                dgvCounties.Columns.Add(HeadersName[i], HeadersTitle[i]);
+            dgvCounties.Columns.Add(Year, YearCA);
+            dgvCounties.Columns.Add(Code, CountyCodeCA);
+            dgvCounties.Columns.Add(Name, CountyCA);
+            dgvCounties.Columns.Add(Population, PopulationCA);
+            dgvCounties.Columns.Add(DomNet, DomesticNetworkCA);
+            dgvCounties.Columns.Add(EcoActs, EconomicActivitiesCA);
+            dgvCounties.Columns.Add(Total, TotalCA);
+            dgvCounties.Columns.Add(ConDomCap, DomesticConsumptionPerCapitaCA);
 
             foreach (var x in counties)
             {
                 int index = dgvCounties.Rows.Add();
-                dgvCounties.Rows[index].Cells["year"].Value = x.Year;
-                dgvCounties.Rows[index].Cells["code"].Value = x.CountyCode;
-                dgvCounties.Rows[index].Cells["name"].Value = x.CountyName;
-                dgvCounties.Rows[index].Cells["population"].Value = x.Population;
-                dgvCounties.Rows[index].Cells["domNet"].Value = x.DomesticNetwork;
-                dgvCounties.Rows[index].Cells["ecoActs"].Value = x.EconomicActivities;
-                dgvCounties.Rows[index].Cells["total"].Value = x.Total;
-                dgvCounties.Rows[index].Cells["conDomCap"].Value = x.DomesticConsumptionPerCapita;
+                dgvCounties.Rows[index].Cells[Year].Value = x.Year;
+                dgvCounties.Rows[index].Cells[Code].Value = x.CountyCode;
+                dgvCounties.Rows[index].Cells[Name].Value = x.CountyName;
+                dgvCounties.Rows[index].Cells[Population].Value = x.Population;
+                dgvCounties.Rows[index].Cells[DomNet].Value = x.DomesticNetwork;
+                dgvCounties.Rows[index].Cells[EcoActs].Value = x.EconomicActivities;
+                dgvCounties.Rows[index].Cells[Total].Value = x.Total;
+                dgvCounties.Rows[index].Cells[ConDomCap].Value = x.DomesticConsumptionPerCapita;
             }
         }
 
         private void dgvCounties_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            if (e.RowIndex >= AvoidNegative)
             {
                 List<County> counties = Csv.ReadCounties();
 
                 lblGb2_11.Text =
-                    Convert.ToSingle(dgvCounties.Rows[e.RowIndex].Cells[3].Value) > 200000
-                        ? "Si"
-                        : "No";
+                    Convert.ToSingle(dgvCounties.Rows[e.RowIndex].Cells[PopulationColunm].Value)
+                    > MinPopulation
+                        ? Yes
+                        : No;
                 lblGb2_12.Text = Math.Round(
-                        Convert.ToSingle(dgvCounties.Rows[e.RowIndex].Cells[4].Value)
-                            / Convert.ToSingle(dgvCounties.Rows[e.RowIndex].Cells[3].Value),
-                        2
+                        Convert.ToSingle(dgvCounties.Rows[e.RowIndex].Cells[DomConColunm].Value)
+                            / Convert.ToSingle(
+                                dgvCounties.Rows[e.RowIndex].Cells[PopulationColunm].Value
+                            ),
+                        Two
                     )
                     .ToString();
-                if (e.ColumnIndex == 0)
+                if (e.ColumnIndex == YearColunm)
                 {
                     float maxValue = counties
                         .Where(
@@ -101,13 +124,13 @@
                         .Min(x => x.DomesticConsumptionPerCapita);
 
                     float currentValue = Convert.ToSingle(
-                        dgvCounties.Rows[e.RowIndex].Cells[7].Value
+                        dgvCounties.Rows[e.RowIndex].Cells[DomConCapCollunm].Value
                     );
-                    lblGb2_13.Text = maxValue == currentValue ? "Si" : "No";
-                    lblGb2_14.Text = minValue == currentValue ? "Si" : "No";
+                    lblGb2_13.Text = maxValue == currentValue ? Yes : No;
+                    lblGb2_14.Text = minValue == currentValue ? Yes : No;
                 }
 
-                if (e.ColumnIndex == 2)
+                if (e.ColumnIndex == CountyColunm)
                 {
                     float maxValue = counties
                         .Where(
@@ -126,11 +149,11 @@
                         .Min(x => x.DomesticConsumptionPerCapita);
 
                     float currentValue = Convert.ToSingle(
-                        dgvCounties.Rows[e.RowIndex].Cells[7].Value
+                        dgvCounties.Rows[e.RowIndex].Cells[DomConCapCollunm].Value
                     );
 
-                    lblGb2_13.Text = currentValue == maxValue ? "Sí" : "No";
-                    lblGb2_14.Text = currentValue == minValue ? "Sí" : "No";
+                    lblGb2_13.Text = currentValue == maxValue ? Yes : No;
+                    lblGb2_14.Text = currentValue == minValue ? Yes : No;
                 }
             }
         }
@@ -163,7 +186,8 @@
             {
                 if (item.Text == string.Empty || !int.TryParse(item.Text, out int useless))
                 {
-                    errPro.SetError(item, "Només numeros");
+                    item.Text = string.Empty;
+                    errPro.SetError(item, ConstraindNumers);
                     AllCorrector = false;
                 }
             }
@@ -171,39 +195,49 @@
             {
                 if (item.Text == string.Empty)
                 {
-                    errPro.SetError(item, "Selecciona un valor");
+                    errPro.SetError(item, ConstraindEmpty);
                     AllCorrector = false;
                 }
             }
             if (
                 txtPopulation.Text == string.Empty
                 || !int.TryParse(txtPopulation.Text, out int value)
-                || txtPopulation.Text.Split(',').Length != 1
+                || txtPopulation.Text.Split(Spliter).Length != One
             )
             {
-                errPro.SetError(txtPopulation, "Nomes numeros enters");
+                txtPopulation.Text = string.Empty;
+                errPro.SetError(txtPopulation, ConstrintWhole);
                 AllCorrector = false;
             }
 
             if (AllCorrector)
             {
+                int year = Convert.ToInt32(cbbYear.Text),
+                    population = Convert.ToInt32(txtPopulation.Text),
+                    dX = Convert.ToInt32(txtDX.Text),
+                    aE = Convert.ToInt32(txtAE.Text),
+                    total = Convert.ToInt32(txtTotal.Text),
+                    cDC = Convert.ToInt32(txtCDC.Text),
+                    code = cbbCounty.SelectedIndex + One;
+                string county = cbbCounty.Text.ToString();
+
+                int index = dgvCounties.Rows.Add();
+                dgvCounties.Rows[index].Cells[Year].Value = year;
+                dgvCounties.Rows[index].Cells[Code].Value = code;
+                dgvCounties.Rows[index].Cells[Name].Value = county;
+                dgvCounties.Rows[index].Cells[Population].Value = population;
+                dgvCounties.Rows[index].Cells[DomNet].Value = dX;
+                dgvCounties.Rows[index].Cells[EcoActs].Value = aE;
+                dgvCounties.Rows[index].Cells[Total].Value = total;
+                dgvCounties.Rows[index].Cells[ConDomCap].Value = cDC;
                 Csv.Write(
                     new List<County>()
                     {
-                        new County(
-                            Convert.ToInt32(cbbYear.Text),
-                            cbbCounty.SelectedIndex + 1,
-                            cbbCounty.Text,
-                            Convert.ToInt32(txtPopulation),
-                            Convert.ToInt32(txtDX.Text),
-                            Convert.ToInt32(txtAE),
-                            Convert.ToInt32(txtTotal),
-                            Convert.ToSingle(txtCDC)
-                        )
+                        new County(year, code, county, population, dX, aE, total, cDC)
                     }
                 );
+                CleanInputs();
             }
-            CleanInputs();
         }
 
         private void cbbCounty_SelectedValueChanged(object sender, EventArgs e) { }

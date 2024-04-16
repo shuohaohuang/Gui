@@ -94,6 +94,7 @@
             // 
             // cbbYear
             // 
+            cbbYear.DropDownStyle = ComboBoxStyle.DropDownList;
             cbbYear.FormattingEnabled = true;
             cbbYear.ItemHeight = 15;
             cbbYear.Location = new Point(9, 73);
@@ -103,6 +104,7 @@
             // 
             // cbbCounty
             // 
+            cbbCounty.DropDownStyle = ComboBoxStyle.DropDownList;
             cbbCounty.FormattingEnabled = true;
             cbbCounty.Location = new Point(113, 73);
             cbbCounty.Name = "cbbCounty";
@@ -351,7 +353,6 @@
             Controls.Add(gb1);
             Controls.Add(bttSave);
             Controls.Add(bttClear);
-            Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
             gb1.ResumeLayout(false);
