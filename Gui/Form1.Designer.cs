@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             lblInfo = new Label();
             lblInfo2 = new Label();
             lblInfo3 = new Label();
@@ -55,10 +58,11 @@
             lblGb2_1 = new Label();
             lblGb2_2 = new Label();
             dgvCounties = new DataGridView();
-            lblTest = new Label();
+            errPro = new ErrorProvider(components);
             gb1.SuspendLayout();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvCounties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errPro).BeginInit();
             SuspendLayout();
             // 
             // lblInfo
@@ -157,6 +161,7 @@
             bttClear.TabIndex = 16;
             bttClear.Text = "Netejar";
             bttClear.UseVisualStyleBackColor = true;
+            bttClear.Click += bttClear_Click;
             // 
             // bttSave
             // 
@@ -166,6 +171,7 @@
             bttSave.TabIndex = 17;
             bttSave.Text = "Guardar";
             bttSave.UseVisualStyleBackColor = true;
+            bttSave.Click += bttSave_Click;
             // 
             // gb1
             // 
@@ -314,26 +320,31 @@
             // dgvCounties
             // 
             dgvCounties.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvCounties.Location = new Point(32, 349);
+            dgvCounties.Location = new Point(12, 349);
             dgvCounties.Name = "dgvCounties";
-            dgvCounties.Size = new Size(840, 150);
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dgvCounties.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvCounties.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dgvCounties.Size = new Size(860, 253);
             dgvCounties.TabIndex = 26;
             dgvCounties.CellClick += dgvCounties_CellClick;
             // 
-            // lblTest
+            // errPro
             // 
-            lblTest.Location = new Point(614, 273);
-            lblTest.Name = "lblTest";
-            lblTest.Size = new Size(238, 23);
-            lblTest.TabIndex = 27;
-            lblTest.Text = "label5";
+            errPro.ContainerControl = this;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(884, 515);
-            Controls.Add(lblTest);
+            ClientSize = new Size(884, 643);
             Controls.Add(dgvCounties);
             Controls.Add(groupBox1);
             Controls.Add(gb1);
@@ -347,6 +358,7 @@
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvCounties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errPro).EndInit();
             ResumeLayout(false);
         }
 
@@ -378,10 +390,10 @@
         private Label lblGb2_12;
         private Label lblGb2_11;
         private DataGridView dgvCounties;
-        private TextBox txtPopulation;
         private TextBox txtCDC;
         private TextBox txtTotal;
         private TextBox txtDX;
-        private Label lblTest;
+        private TextBox txtPopulation;
+        private ErrorProvider errPro;
     }
 }

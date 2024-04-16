@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CsvHelper;
+using CsvHelper.Configuration;
 
 namespace Gui
 {
@@ -42,6 +43,17 @@ namespace Gui
             }
 
             return counties;
+        }
+        public static void Write(List<County> counties)
+        {
+            using var writer = new StreamWriter(File.Open(Path, FileMode.Append) );
+            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+            {
+                HasHeaderRecord = false
+            };
+            using var csv = new CsvWriter(writer, config);
+
+            csv.WriteRecords(counties);
         }
     }
 }

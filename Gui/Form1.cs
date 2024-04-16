@@ -2,7 +2,6 @@
 {
     public partial class Form1 : Form
     {
-
         public Form1()
         {
             InitializeComponent();
@@ -18,12 +17,15 @@
                 cbbYear.Items.Add(i);
 
             foreach (var x in counties)
-                CountiesDic[x.CountyCode] = x.CountyName;
+                CountiesDic.TryAdd(x.CountyCode, x.CountyName);
+
             Xml.Create(CountiesDic);
+
             foreach (var x in Xml.Read())
                 cbbCounty.Items.Add(x.Value);
 
             counties = Csv.ReadCounties().OrderBy(x => x.Year).ToList();
+
             dgvCounties.Columns.Add("year", "Any");
             dgvCounties.Columns.Add("code", "Codi comarca");
             dgvCounties.Columns.Add("name", "Comarca");
@@ -32,6 +34,7 @@
             dgvCounties.Columns.Add("ecoActs", "Activitats econòmiques i fonts pròpies");
             dgvCounties.Columns.Add("total", "Total");
             dgvCounties.Columns.Add("conDomCap", "Consum domèstic per càpita");
+
             foreach (var x in counties)
             {
                 int index = dgvCounties.Rows.Add();
@@ -48,47 +51,123 @@
 
         private void dgvCounties_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            List<County> counties = Csv.ReadCounties();
-            if (e.RowIndex >= 0 && e.ColumnIndex == 0)
+            if (e.RowIndex >= 0)
             {
-                float value = counties
-                        .Where(x => x.Year == Convert.ToInt32(dgvCounties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value))
-                        .Max(x => x.DomesticConsumptionPerCapita);
-                lblTest.Text = value.ToString();
-                lblGb2_13.Text =
-                    counties
-                        .Where(x => x.Year == Convert.ToInt32(dgvCounties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value))
-                        .Max(x => x.DomesticConsumptionPerCapita)
-                    == Convert.ToInt32(dgvCounties.Rows[e.RowIndex].Cells[7].Value)
+                List<County> counties = Csv.ReadCounties();
+
+                lblGb2_11.Text =
+                    Convert.ToSingle(dgvCounties.Rows[e.RowIndex].Cells[3].Value) > 200000
                         ? "Si"
                         : "No";
-                lblGb2_14.Text =
-                    counties
-                        .Where(x => x.Year == Convert.ToInt32(dgvCounties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value))
-                        .Min(x => x.DomesticConsumptionPerCapita)
-                    == Convert.ToInt32(dgvCounties.Rows[e.RowIndex].Cells[7].Value)
-                        ? "Sí"
-                        : "No";
+                lblGb2_12.Text = Math.Round(
+                        Convert.ToSingle(dgvCounties.Rows[e.RowIndex].Cells[4].Value)
+                            / Convert.ToSingle(dgvCounties.Rows[e.RowIndex].Cells[3].Value),
+                        2
+                    )
+                    .ToString();
+                if (e.ColumnIndex == 0)
+                {
+                    float maxValue = counties
+                        .Where(x =>
+                            x.Year
+                            == Convert.ToSingle(
+                                dgvCounties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value
+                            )
+                        )
+                        .Max(x => x.DomesticConsumptionPerCapita);
+
+                    float minValue = counties
+                        .Where(x =>
+                            x.Year
+                            == Convert.ToSingle(
+                                dgvCounties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value
+                            )
+                        )
+                        .Min(x => x.DomesticConsumptionPerCapita);
+
+                    float currentValue = Convert.ToSingle(
+                        dgvCounties.Rows[e.RowIndex].Cells[7].Value
+                    );
+                    lblGb2_13.Text = maxValue == currentValue ? "Si" : "No";
+                    lblGb2_14.Text = minValue == currentValue ? "Si" : "No";
+                }
+
+                if (e.ColumnIndex == 2)
+                {
+                    float maxValue = counties
+                        .Where(x =>
+                            x.CountyName
+                            == (string)dgvCounties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value
+                        )
+                        .Max(x => x.DomesticConsumptionPerCapita);
+
+                    float minValue = counties
+                        .Where(x =>
+                            x.CountyName
+                            == (string)dgvCounties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value
+                        )
+                        .Min(x => x.DomesticConsumptionPerCapita);
+
+                    float currentValue = Convert.ToSingle(
+                        dgvCounties.Rows[e.RowIndex].Cells[7].Value
+                    );
+
+                    lblGb2_13.Text = currentValue == maxValue ? "Sí" : "No";
+                    lblGb2_14.Text = currentValue == minValue ? "Sí" : "No";
+                }
+            }
+        }
+
+        public void CleanInputs()
+        {
+            cbbCounty.Text = string.Empty;
+            cbbYear.Text = string.Empty;
+            txtDX.Text = string.Empty;
+            txtCDC.Text = string.Empty;
+            txtAE.Text = string.Empty;
+            txtPopulation.Text = string.Empty;
+            txtTotal.Text = string.Empty;
+        }
+
+        private void bttClear_Click(object sender, EventArgs e)
+        {
+            CleanInputs();
+        }
+
+        private void bttSave_Click(object sender, EventArgs e)
+        {
+            errPro.Clear();
+            List<TextBox> list = new List<TextBox>() { txtDX, txtCDC, txtAE, txtTotal };
+            decimal value;
+            bool AllCorrector = true;
+            List<decimal> values = new List<decimal>();
+            foreach (var item in list)
+            {
+                if (decimal.TryParse(item.Text, out value))
+                    values.Add(value);
+                else
+                {
+                    errPro.SetError(item, "Nomes numeros");
+                    AllCorrector=false;
+                }
             }
 
-            if (e.RowIndex >= 0 && e.ColumnIndex == 2) 
+            if (
+                decimal.TryParse(txtPopulation.Text, out value)
+                && txtPopulation.Text.Split(',').Length == 1
+            )
+                values.Add(Convert.ToInt32(value));
+            else
             {
-               
-                lblGb2_13.Text =
-                    counties
-                        .Where(x => x.CountyName == dgvCounties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value)
-                        .Max(x => x.DomesticConsumptionPerCapita)
-                    == Convert.ToInt32(dgvCounties.Rows[e.RowIndex].Cells[7].Value)
-                        ? "No"
-                        : "Sí";
-                lblGb2_14.Text =
-                    counties
-                        .Where(x => x.CountyName == dgvCounties.Rows[e.RowIndex].Cells[e.ColumnIndex].Value)
-                        .Min(x => x.DomesticConsumptionPerCapita)
-                    == Convert.ToInt32(dgvCounties.Rows[e.RowIndex].Cells[7].Value)
-                        ? "Sí"
-                        : "No";
+                errPro.SetError(txtTotal, "Nomes numeros enters");
+                AllCorrector = false;
             }
+
+            if (AllCorrector)
+            {
+                
+            }
+
         }
     }
 }

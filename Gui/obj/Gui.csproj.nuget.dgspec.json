@@ -11,7 +11,7 @@
         "projectName": "Gui",
         "projectPath": "C:\\Users\\argo\\source\\repos\\Gui\\Gui\\Gui.csproj",
         "packagesPath": "C:\\Users\\argo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\argo\\Source\\Repos\\Gui\\Gui\\obj\\",
+        "outputPath": "C:\\Users\\argo\\source\\repos\\Gui\\Gui\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\argo\\AppData\\Roaming\\NuGet\\NuGet.Config",
